@@ -31,4 +31,5 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :test do
   gem 'capybara', '0.4.0', :require => false
+  gem 'launchy', '0.3.7', :require => false
 end

@@ -11,4 +11,13 @@ class ActiveSupport::TestCase
   def assert_see(content)
     assert(page.has_content?(content), "Expected page to contain \"#{content}\", but it didn't")
   end
+
+  def assert_see_blog(blog)
+    within("#blogs") { assert_see(blog.title) }
+    within("#blogs") { assert_see(blog.body) }
+  end
+
+  def assert_on(path)
+    assert_equal(path, current_path)
+  end
 end

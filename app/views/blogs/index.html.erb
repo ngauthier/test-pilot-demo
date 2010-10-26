@@ -1,1 +1,20 @@
 <h1>Blog Posts</h1>
+<div id='blogs'>
+  <% @blogs.each do |blog| %>
+    <div class='blog'>
+      <div class='title'><%= blog.title %></div>
+      <div class='body'><%= blog.body %></div>
+    </div>
+  <% end %>
+</div>
+
+<%= form_for @new_blog do |f| %> 
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  <p>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+  <p>
+    <%= f.submit 'Create Post' %>
+<% end %>
