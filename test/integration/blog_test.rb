@@ -7,13 +7,16 @@ class BlogTest < ActionDispatch::IntegrationTest
   end
 
   test "Create a new post" do
-    visit root_path
-    fill_in "Title", :with => "a blog title"
-    fill_in "Body", :with => "a blog body"
-    click_button 'Create Post'
-    assert_on root_path
-    assert_see 'a blog title'
-    assert_see 'a blog body'
+    BlogPilot do
+      assert_difference("Blog.count") do
+        create_blog(
+          Blog.new(
+            :title => 'a blog title',
+            :body => 'a blog body'
+          )
+        )
+      end
+    end
   end
 
   test "See some blog posts - Pilot" do
@@ -24,6 +27,15 @@ class BlogTest < ActionDispatch::IntegrationTest
       assert_see_blog(b1)
       assert_see_blog(b2)
     end
+  end
 
+  test "Delete a blog post" do
+    b = Blog.create!(:title => "delete me", :body => "x")
+    BlogPilot do
+      assert_see_blog(b)
+      assert_difference("Blog.count", -1) do
+        delete_blog(b)
+      end
+    end
   end
 end

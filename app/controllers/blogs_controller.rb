@@ -8,4 +8,9 @@ class BlogsController < ApplicationController
     Blog.create! params[:blog]
     redirect_to root_path
   end
+
+  def destroy
+    Blog.find(params[:id]).destroy
+    redirect_to root_path
+  end
 end

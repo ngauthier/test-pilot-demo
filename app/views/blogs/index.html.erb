@@ -1,9 +1,10 @@
 <h1>Blog Posts</h1>
 <div id='blogs'>
   <% @blogs.each do |blog| %>
-    <div class='blog'>
+    <div class='blog' id='<%= dom_id blog %>'>
       <div class='title'><%= blog.title %></div>
       <div class='body'><%= blog.body %></div>
+      <%= button_to 'Delete', blog_path(blog), :method => :delete %>
     </div>
   <% end %>
 </div>
