@@ -9,7 +9,7 @@ class BlogTest < ActionDispatch::IntegrationTest
   test "Create a new post" do
     BlogPilot do
       assert_difference("Blog.count") do
-        create_blog(
+        create(
           Blog.new(
             :title => 'a blog title',
             :body => 'a blog body'
@@ -24,17 +24,17 @@ class BlogTest < ActionDispatch::IntegrationTest
     b2 = Blog.create!(:title => "My second post", :body => "This is my second blog post")
 
     BlogPilot do
-      assert_see_blog(b1)
-      assert_see_blog(b2)
+      assert_exists(b1)
+      assert_exists(b2)
     end
   end
 
   test "Delete a blog post" do
     b = Blog.create!(:title => "delete me", :body => "x")
     BlogPilot do
-      assert_see_blog(b)
+      assert_exists(b)
       assert_difference("Blog.count", -1) do
-        delete_blog(b)
+        delete(b)
       end
     end
   end

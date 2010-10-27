@@ -1,12 +1,12 @@
 class BlogPilot < TestPilot::Core
-  def assert_see_blog(blog)
+  def assert_exists(blog)
     visit(root_path)
     assert_see "Blog Posts"
     within("#blogs") { assert_see(blog.title) }
     within("#blogs") { assert_see(blog.body) }
   end
 
-  def create_blog(blog)
+  def create(blog)
     visit root_path
     fill_in "Title", :with => blog.title
     fill_in "Body", :with => blog.body
@@ -16,7 +16,7 @@ class BlogPilot < TestPilot::Core
     assert_see blog.body
   end
 
-  def delete_blog(blog)
+  def delete(blog)
     extend ActionController::RecordIdentifier
     visit root_path
     within("##{dom_id(blog)}") { click_button 'Delete' }
