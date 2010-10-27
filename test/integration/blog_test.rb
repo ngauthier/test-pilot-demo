@@ -8,14 +8,9 @@ class BlogTest < ActionDispatch::IntegrationTest
 
   test "Create a new post" do
     BlogPilot do
-      assert_difference("Blog.count") do
-        create(
-          Blog.new(
-            :title => 'a blog title',
-            :body => 'a blog body'
-          )
-        )
-      end
+      create(
+        Blog.new(:title => 'a blog title', :body => 'a blog body')
+      )
     end
   end
 
